@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../prisma/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum difficulty {
+  easy
+  medium
+  hard
+}
+
+model logic_puzzle {
+  id          String     @id @default(cuid())
+  name        String
+  image       String?
+  description String
+  difficulty  difficulty
+  completed   Boolean    @default(false)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  hint hint[]
+}
+
+model hint {
+  id        BigInt   @id @default(autoincrement())
+  puzzleId  String
+  text      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  puzzle logic_puzzle @relation(fields: [puzzleId], references: [id])
+}
