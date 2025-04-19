@@ -15,27 +15,37 @@ enum difficulty {
   easy
   medium
   hard
+  hard_p
+}
+
+model puzzle {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  completed   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  difficultyId difficulty
+  logic_puzzle logic_puzzle?
 }
 
 model logic_puzzle {
-  id          String     @id @default(cuid())
-  name        String
-  image       String?
-  description String
-  difficulty  difficulty
-  completed   Boolean    @default(false)
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-
-  hint hint[]
-}
-
-model hint {
-  id        BigInt   @id @default(autoincrement())
-  puzzleId  String
-  text      String
+  puzzleId  String   @id
+  image     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  puzzle logic_puzzle @relation(fields: [puzzleId], references: [id])
+  puzzle puzzle @relation(fields: [puzzleId], references: [id])
+  hint   hint[]
+}
+
+model hint {
+  id            BigInt   @id @default(autoincrement())
+  logicPuzzleId String
+  text          String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  logic_puzzle logic_puzzle @relation(fields: [logicPuzzleId], references: [puzzleId])
 }

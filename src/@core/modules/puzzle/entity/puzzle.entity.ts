@@ -1,29 +1,36 @@
 import { difficulty } from '../../../../../prisma/generated/prisma'
 import { Hint } from '../../hint/entity/hint.entity'
-import { Puzzle } from '../../puzzle/entity/puzzle.entity'
 
-interface ILogicPuzzle {
+interface IPuzzle {
   title: string
   description: string
-  image?: string
   difficulty: difficulty
   hint?: Hint[]
 }
 
-export class LogicPuzzle extends Puzzle {
-  constructor(public readonly props: ILogicPuzzle) {
-    super(props)
+export class Puzzle {
+  constructor(public readonly props: IPuzzle) {}
+
+  get title() {
+    return this.props.title
   }
 
-  get image() {
-    return this.props.image
+  get description() {
+    return this.props.description
+  }
+
+  get difficulty() {
+    return this.props.difficulty
+  }
+
+  get hint() {
+    return this.props.hint
   }
 
   toJson() {
     return {
       title: this.title,
       description: this.description,
-      image: this.image,
       difficulty: this.difficulty,
       hint: this.hint?.map((hint) => hint.toJson()),
     }

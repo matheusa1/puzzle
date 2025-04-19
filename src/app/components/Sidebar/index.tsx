@@ -9,7 +9,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
-import { Home } from 'lucide-react'
+import { Gauge, Home } from 'lucide-react'
 import Link from 'next/link'
 import { FC } from 'react'
 
@@ -17,21 +17,6 @@ const AppSidebar: FC = () => {
   return (
     <Sidebar>
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href={globalRoutes.home.routes.index.path}>
-                    <Home />
-                    <span>{globalRoutes.home.routes.index.name}</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarGroupLabel>Puzzles</SidebarGroupLabel>

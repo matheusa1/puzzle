@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
 import { difficulty } from '../../../../../prisma/generated/prisma'
+import { createHintSchema } from '../../hint/schema/create.schema'
 
 export const createLogicPuzzleSchema = z.object({
   title: z.string().min(1, { message: 'Title is required' }),
@@ -12,6 +13,9 @@ export const createLogicPuzzleSchema = z.object({
     .optional(),
   description: z.string(),
   difficulty: z.nativeEnum(difficulty),
+  hint: z.array(createHintSchema).min(1, {
+    message: 'At least one hint is required',
+  }),
 })
 
 export type TCreateLogicPuzzleSchema = z.infer<typeof createLogicPuzzleSchema>

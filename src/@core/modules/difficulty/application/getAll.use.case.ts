@@ -1,23 +1,32 @@
 import { difficulty } from '../../../../../prisma/generated/prisma'
 import { Difficulty } from '../entity/difficulty.entity'
 
-export class GetDifficultyListUseCase {
+export class GetDifficultiesUseCase {
   execute(): Difficulty[] {
     const easy = new Difficulty({
+      id: difficulty.easy,
       label: 'Fácil',
-      value: difficulty.easy,
+      color: '#00FF00',
     })
+
     const medium = new Difficulty({
+      id: difficulty.medium,
       label: 'Médio',
-      value: difficulty.medium,
+      color: '#FFFF00',
     })
+
     const hard = new Difficulty({
+      id: difficulty.hard,
       label: 'Difícil',
-      value: difficulty.hard,
+      color: '#FF0000',
     })
 
-    const difficultyList = [easy, medium, hard]
+    const hard_p = new Difficulty({
+      id: difficulty.hard_p,
+      label: 'Difícil +',
+      color: '#CC0000',
+    })
 
-    return difficultyList
+    return [easy, medium, hard, hard_p]
   }
 }

@@ -1,5 +1,6 @@
 'use client'
 
+import { Hint } from '@/@core/modules/hint/entity/hint.entity'
 import { LogicPuzzle } from '@/@core/modules/logic-puzzle/entity/logic-puzzle.entity'
 import {
   TCreateLogicPuzzleSchema,
@@ -34,17 +35,19 @@ const Create: FC = () => {
   const description = form.watch('description')
   const image = form.watch('image')
   const difficulty = form.watch('difficulty')
+  const hints = form.watch('hint')
 
-  const puzzle = useMemo(
-    () =>
-      new LogicPuzzle({
-        title: title,
-        description: description,
-        image: image,
-        difficulty: difficulty,
-      }),
-    [title, description, image, difficulty],
-  )
+  const puzzle = useMemo(() => {
+    const hintsClass = hints?.map((hint) => new Hint({ text: hint.text }))
+
+    return new LogicPuzzle({
+      title: title,
+      description: description,
+      image: image,
+      difficulty: difficulty,
+      hint: hintsClass,
+    })
+  }, [title, description, image, difficulty, hints])
 
   return (
     <div className={'@container flex-1 flex space-x-4'}>
@@ -64,7 +67,9 @@ const Create: FC = () => {
           <CardTitle>Preview</CardTitle>
           <CardDescription>Exemplo de como ficará o puzzle</CardDescription>
         </CardHeader>
-        <PuzzleInfo puzzle={puzzle} />
+        <CardContent>
+          <PuzzleInfo puzzle={puzzle} />
+        </CardContent>
       </Card>
     </div>
   )
