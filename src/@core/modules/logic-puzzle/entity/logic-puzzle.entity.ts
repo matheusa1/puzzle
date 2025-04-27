@@ -1,12 +1,35 @@
 import { difficulty } from '../../../../../prisma/generated/prisma'
-import { Hint } from '../../hint/entity/hint.entity'
+import { Hint, THint } from '../../hint/entity/hint.entity'
 import { Puzzle } from '../../puzzle/entity/puzzle.entity'
 
-interface ILogicPuzzle {
+export type TCreateLogicPuzzle = {
+  image?: string
+  puzzleId: string
+  hints: {
+    text: string
+    order: number
+  }[]
+}
+
+export type TLogicPuzzle = {
+  id: string
   title: string
   description: string
   image?: string
   difficulty: difficulty
+  createdAt: Date
+  updatedAt: Date
+  hint?: THint[]
+}
+
+interface ILogicPuzzle {
+  id: string
+  title: string
+  description: string
+  image?: string
+  difficulty: difficulty
+  createdAt: Date
+  updatedAt: Date
   hint?: Hint[]
 }
 
@@ -21,11 +44,14 @@ export class LogicPuzzle extends Puzzle {
 
   toJson() {
     return {
+      id: this.id,
       title: this.title,
       description: this.description,
       image: this.image,
       difficulty: this.difficulty,
-      hint: this.hint?.map((hint) => hint.toJson()),
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+      hint: this.props.hint?.map((hint) => hint.toJson()),
     }
   }
 }

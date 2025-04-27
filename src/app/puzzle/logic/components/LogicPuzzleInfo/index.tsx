@@ -1,12 +1,12 @@
 import { difficulty as difficultyRegistry } from '@/@core/modules/difficulty/infra/registry'
-import { LogicPuzzle } from '@/@core/modules/logic-puzzle/entity/logic-puzzle.entity'
+import { ILogicPuzzle } from '@/@core/modules/logic-puzzle/entity/logic-puzzle.entity'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Badge } from '@/components/ui/badge'
 import Image from 'next/image'
 import { FC, useMemo } from 'react'
 
 type TPuzzleInfo = {
-  puzzle: LogicPuzzle
+  puzzle: ILogicPuzzle
 }
 
 const PuzzleInfo: FC<TPuzzleInfo> = ({ puzzle }) => {
@@ -17,8 +17,6 @@ const PuzzleInfo: FC<TPuzzleInfo> = ({ puzzle }) => {
         : undefined,
     [puzzle],
   )
-
-  console.log({ puzzle: puzzle.toJson() })
 
   return (
     <div className={'flex-1 flex flex-col space-y-8'}>
@@ -45,9 +43,9 @@ const PuzzleInfo: FC<TPuzzleInfo> = ({ puzzle }) => {
       </div>
       {puzzle.hint && (
         <div className="w-full flex flex-col space-y-3">
-          {puzzle.hint?.map((hint, index) => (
-            <div key={index} className="flex items-start space-x-4">
-              <h4 className="h4">{index + 1}.</h4>
+          {puzzle.hint?.map((hint) => (
+            <div key={hint.id} className="flex items-start space-x-4">
+              <h4 className="h4">{hint.order}.</h4>
               <p className="">{hint.text}</p>
             </div>
           ))}

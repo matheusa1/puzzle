@@ -2,6 +2,7 @@
 
 import { difficulty } from '@/@core/modules/difficulty/infra/registry'
 import { TCreateLogicPuzzleSchema } from '@/@core/modules/logic-puzzle/schema/create.schema'
+import { requestHandler } from '@/@core/utils/hander'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import {
@@ -23,8 +24,10 @@ import {
 import { Textarea } from '@/components/ui/textarea'
 import { FC, useMemo, useState } from 'react'
 import { FormProvider, UseFormReturn } from 'react-hook-form'
+import { toast } from 'sonner'
 
 import HintsModalForm from '../HintsModalForm'
+import { createLogicPuzzle } from './actions'
 
 type TLogicPuzzleForm = {
   form: UseFormReturn<TCreateLogicPuzzleSchema>
@@ -35,8 +38,21 @@ const LogicPuzzleForm: FC<TLogicPuzzleForm> = ({ form }) => {
 
   const difficulties = useMemo(() => difficulty.getAll.execute(), [])
 
-  const onHandleOnSubmit = (formData: TCreateLogicPuzzleSchema) => {
-    console.log({ formData })
+  const onHandleOnSubmit = async (formData: TCreateLogicPuzzleSchema) => {
+    const [data, error] = await requestHandler({
+      function: createLogicPuzzle,
+      params: formData,
+    })
+
+    if (error) {
+      toast.error(error)
+    }
+
+    if (data) {
+      toast.success('Puzzle criado com sucesso!')
+      form.reset()
+      setHints([])
+    }
   }
 
   const addHint = (hint: string) => {
@@ -44,7 +60,7 @@ const LogicPuzzleForm: FC<TLogicPuzzleForm> = ({ form }) => {
     setHints(updatedHints)
     form.setValue(
       'hint',
-      updatedHints.map((hint) => ({ text: hint })),
+      updatedHints.map((hint, index) => ({ text: hint, order: index + 1 })),
     )
   }
 
@@ -55,7 +71,7 @@ const LogicPuzzleForm: FC<TLogicPuzzleForm> = ({ form }) => {
     setHints(updatedHints)
     form.setValue(
       'hint',
-      updatedHints.map((hint) => ({ text: hint })),
+      updatedHints.map((hint, index) => ({ text: hint, order: index + 1 })),
     )
   }
 
@@ -66,7 +82,7 @@ const LogicPuzzleForm: FC<TLogicPuzzleForm> = ({ form }) => {
     setHints(updatedHints)
     form.setValue(
       'hint',
-      updatedHints.map((hint) => ({ text: hint })),
+      updatedHints.map((hint, index) => ({ text: hint, order: index + 1 })),
     )
   }
 

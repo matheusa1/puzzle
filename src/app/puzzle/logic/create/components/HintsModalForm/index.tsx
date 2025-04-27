@@ -42,6 +42,7 @@ const HintsModalForm: FC<THintsModalForm> = ({
     resolver: zodResolver(createHintSchema),
     defaultValues: {
       text: hint ? hint.hint : '',
+      order: hint ? hint.index : 0,
     },
   })
 

@@ -1,5 +1,6 @@
 import { Separator } from '@/components/ui/separator'
 import { SidebarProvider } from '@/components/ui/sidebar'
+import { Toaster } from '@/components/ui/sonner'
 import { FC, ReactNode } from 'react'
 
 import Header from './components/Header'
@@ -29,6 +30,7 @@ const RootLayout: FC<TRootLayout> = ({ children }) => {
                 <Separator className="mb-2" />
                 <section className="flex-1 px-4 flex pb-4">{children}</section>
               </main>
+              <Toaster closeButton position="top-right" expand richColors />
             </SidebarProvider>
           </ThemeProvider>
         </div>

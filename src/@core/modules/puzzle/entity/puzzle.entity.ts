@@ -1,15 +1,20 @@
 import { difficulty } from '../../../../../prisma/generated/prisma'
-import { Hint } from '../../hint/entity/hint.entity'
 
 interface IPuzzle {
+  id: string
   title: string
   description: string
   difficulty: difficulty
-  hint?: Hint[]
+  createdAt: Date
+  updatedAt: Date
 }
 
 export class Puzzle {
   constructor(public readonly props: IPuzzle) {}
+
+  get id() {
+    return this.props.id
+  }
 
   get title() {
     return this.props.title
@@ -23,16 +28,22 @@ export class Puzzle {
     return this.props.difficulty
   }
 
-  get hint() {
-    return this.props.hint
+  get createdAt() {
+    return this.props.createdAt
+  }
+
+  get updatedAt() {
+    return this.props.updatedAt
   }
 
   toJson() {
     return {
+      id: this.id,
       title: this.title,
       description: this.description,
       difficulty: this.difficulty,
-      hint: this.hint?.map((hint) => hint.toJson()),
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
     }
   }
 }

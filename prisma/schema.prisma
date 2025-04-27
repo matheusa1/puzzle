@@ -31,21 +31,79 @@ model puzzle {
 }
 
 model logic_puzzle {
-  puzzleId  String   @id
   image     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  puzzle puzzle @relation(fields: [puzzleId], references: [id])
-  hint   hint[]
+  puzzleId String @id
+  puzzle   puzzle @relation(fields: [puzzleId], references: [id])
+
+  hint hint[]
+
+  attribute attribute[]
+
+  solution_group solution_group[]
 }
 
 model hint {
-  id            BigInt   @id @default(autoincrement())
-  logicPuzzleId String
-  text          String
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id        String   @id @default(cuid())
+  order     Int
+  text      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  logic_puzzle logic_puzzle @relation(fields: [logicPuzzleId], references: [puzzleId])
+  logicPuzzleId String
+  logic_puzzle  logic_puzzle @relation(fields: [logicPuzzleId], references: [puzzleId])
+}
+
+model attribute {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  logicPuzzleId String
+  logic_puzzle  logic_puzzle @relation(fields: [logicPuzzleId], references: [puzzleId])
+  options       options[]
+
+  solution_value solution_value[]
+}
+
+model options {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  attributeId String
+
+  attribute attribute @relation(fields: [attributeId], references: [id])
+
+  solution_value solution_value[]
+}
+
+model solution_group {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  logicPuzzleId String
+  logic_puzzle  logic_puzzle @relation(fields: [logicPuzzleId], references: [puzzleId])
+
+  solution_value solution_value[]
+}
+
+model solution_value {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  solutionGroupId String
+  solution_group  solution_group @relation(fields: [solutionGroupId], references: [id])
+
+  attributeId String
+  attribute   attribute @relation(fields: [attributeId], references: [id])
+
+  optionsId String
+  options   options @relation(fields: [optionsId], references: [id])
 }
