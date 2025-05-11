@@ -13,8 +13,8 @@
     "windows": [
       {
         "title": "Puzzle",
-        "width": 1920,
-        "height": 1080,
+        "width": 1900,
+        "height": 1070,
         "resizable": true,
         "fullscreen": false
       }

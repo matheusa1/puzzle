@@ -1,4 +1,4 @@
-import { logicPuzzleRoutes } from '../puzzle/logic/routes'
+import { logicPuzzleRoutes } from '../logic-puzzle/routes'
 
 export const globalRoutes = {
   home: {

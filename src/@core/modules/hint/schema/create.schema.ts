@@ -5,4 +5,9 @@ export const createHintSchema = z.object({
   order: z.number(),
 })
 
+export const createHintNoOrderSchema = z.object({
+  text: z.string(),
+})
+
 export type TCreateHintSchema = z.infer<typeof createHintSchema>
+export type TCreateHintNoOrderSchema = z.infer<typeof createHintNoOrderSchema>

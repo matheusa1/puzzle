@@ -1,21 +1,22 @@
-import { z } from 'zod'
+import * as z from 'zod'
 
-import { createHintSchema } from '../../hint/schema/create.schema'
 import { createPuzzleSchema } from '../../puzzle/schema/create.schema'
 
 export const logicPuzzleSchema = z.object({
   image: z
-    .string()
-    .url({
-      message: 'Image must be a valid URL',
+    .string({
+      invalid_type_error: 'A imagem deve ser um texto',
+      message: 'A imagem deve ser uma URL',
+    })
+    .refine((url) => !url || /^https?:\/\/.+/i.test(url), {
+      message: 'Informe uma URL válida',
     })
     .optional(),
-  hint: z.array(createHintSchema).min(1, {
-    message: 'At least one hint is required',
-  }),
 })
 
-export const createLogicPuzzleSchema =
-  logicPuzzleSchema.merge(createPuzzleSchema)
+export const createLogicPuzzleSchema = z.object({
+  ...logicPuzzleSchema.shape,
+  ...createPuzzleSchema.shape,
+})
 
 export type TCreateLogicPuzzleSchema = z.infer<typeof createLogicPuzzleSchema>

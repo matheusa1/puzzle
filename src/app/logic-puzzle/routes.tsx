@@ -6,11 +6,11 @@ export const logicPuzzleRoutes = {
   routes: {
     index: {
       name: 'Problemas de Lógica',
-      path: '/puzzle/logic',
+      path: '/logic-puzzle',
     },
     create: {
       name: 'Criar',
-      path: '/puzzle/logic/create',
+      path: '/logic-puzzle/create',
     },
   },
 }

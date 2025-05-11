@@ -3,7 +3,7 @@ type TRequestHandler<T, X> = {
   params: X
 }
 
-type TRequestHandlerResult<T> = [T | null, string | null]
+type TRequestHandlerResult<T> = [T | null, null | string]
 
 export const requestHandler = async <T, X>(
   params: TRequestHandler<T, X>,

@@ -1,12 +1,12 @@
 import { difficulty as difficultyRegistry } from '@/@core/modules/difficulty/infra/registry'
-import { ILogicPuzzle } from '@/@core/modules/logic-puzzle/entity/logic-puzzle.entity'
+import { TLogicPuzzle } from '@/@core/modules/logic-puzzle/entity/logic-puzzle.entity'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Badge } from '@/components/ui/badge'
 import Image from 'next/image'
 import { FC, useMemo } from 'react'
 
 type TPuzzleInfo = {
-  puzzle: ILogicPuzzle
+  puzzle: TLogicPuzzle
 }
 
 const PuzzleInfo: FC<TPuzzleInfo> = ({ puzzle }) => {

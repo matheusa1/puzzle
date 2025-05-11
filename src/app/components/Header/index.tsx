@@ -1,4 +1,4 @@
-import { logicPuzzleRoutes } from '@/app/puzzle/logic/routes'
+import { logicPuzzleRoutes } from '@/app/logic-puzzle/routes'
 import { globalRoutes } from '@/app/routes'
 import {
   Breadcrumb,
