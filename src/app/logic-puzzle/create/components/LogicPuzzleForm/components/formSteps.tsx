@@ -1,4 +1,5 @@
-import Hints from './Hints'
+import AttributesForm from './AttributesForm'
+import Hints from './HintsForm'
 import PuzzleInfo from './PuzzleInfo'
 
 export type TFormStepProps = {
@@ -26,5 +27,11 @@ export const steps: TFormStep<TFormStepProps>[] = [
     title: 'Dicas',
     description: 'Preencha as dicas do puzzle',
     component: Hints,
+  },
+  {
+    id: 'attributes',
+    title: 'Atributos',
+    description: 'Preencha os atributos do puzzle',
+    component: AttributesForm,
   },
 ]

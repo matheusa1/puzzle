@@ -24,7 +24,9 @@ const FormStepsFooter: FC<{
           Avançar
         </Button>
       ) : (
-        <Button>Salvar</Button>
+        <Button onClick={submitFn} type={submit ? 'submit' : 'button'}>
+          Salvar
+        </Button>
       )}
     </footer>
   )

@@ -24,6 +24,7 @@ export const PuzzleInfoProvider = ({
     createdAt: new Date(),
     updatedAt: new Date(),
     hint: [],
+    attribute: [],
   })
 
   const values: TPuzzleInfoContext = useMemo(

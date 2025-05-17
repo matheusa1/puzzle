@@ -9,7 +9,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
-import { Gauge, Home } from 'lucide-react'
 import Link from 'next/link'
 import { FC } from 'react'
 

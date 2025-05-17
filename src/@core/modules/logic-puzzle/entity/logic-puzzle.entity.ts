@@ -1,4 +1,5 @@
 import { difficulty } from '../../../../../prisma/generated/prisma'
+import { Attribute, TAttribute } from '../../attribute/entity/attribute.entity'
 import { Hint, THint } from '../../hint/entity/hint.entity'
 import { Puzzle } from '../../puzzle/entity/puzzle.entity'
 
@@ -20,6 +21,7 @@ export type TLogicPuzzle = {
   createdAt: Date
   updatedAt: Date
   hint?: THint[]
+  attribute?: TAttribute[]
 }
 
 interface ILogicPuzzle {
@@ -31,6 +33,7 @@ interface ILogicPuzzle {
   createdAt: Date
   updatedAt: Date
   hint?: Hint[]
+  attribute?: Attribute[]
 }
 
 export class LogicPuzzle extends Puzzle {
@@ -52,6 +55,7 @@ export class LogicPuzzle extends Puzzle {
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
       hint: this.props.hint?.map((hint) => hint.toJson()),
+      attribute: this.props.attribute?.map((attribute) => attribute.toJson()),
     }
   }
 }

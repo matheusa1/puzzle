@@ -17,7 +17,7 @@ export class CreateLogicPuzzleUseCase {
     const logicPuzzle = await this.gateway.create({
       puzzleId: puzzle.id,
       image: params.image,
-      hints: params.hint,
+      hints: [],
     })
 
     const hintsEntities = logicPuzzle.hint.map((hint) => {
