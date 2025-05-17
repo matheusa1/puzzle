@@ -59,7 +59,6 @@ const Hints: FC<TFormStepProps> = ({ formStep, setFormStep, steps }) => {
   })
 
   const onSubmit = (data: TCreateHintNoOrderSchema) => {
-    console.log('data', data)
     setHints((prev) => [...prev, { ...data, id: prev.length + 1 }])
     setPuzzleInfo((prev) => ({
       ...prev,

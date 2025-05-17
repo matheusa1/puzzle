@@ -6,7 +6,9 @@ export const createHintSchema = z.object({
 })
 
 export const createHintNoOrderSchema = z.object({
-  text: z.string(),
+  text: z.string().min(1, {
+    message: 'O texto da dica é obrigatório',
+  }),
 })
 
 export type TCreateHintSchema = z.infer<typeof createHintSchema>

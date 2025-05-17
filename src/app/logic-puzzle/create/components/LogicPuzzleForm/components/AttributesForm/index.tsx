@@ -12,7 +12,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { Textarea } from '@/components/ui/textarea'
+import { Input } from '@/components/ui/input'
 import {
   DndContext,
   DragEndEvent,
@@ -89,9 +89,9 @@ const AttributesForm: FC<TFormStepProps> = ({
     setAttributes((prev) => prev.filter((_, attrIndex) => attrIndex !== index))
     setPuzzleInfo((prev) => ({
       ...prev,
-      hint: prev?.hint
-        ?.filter((_, hintIndex) => hintIndex !== index)
-        .map((hint, index) => ({ ...hint, order: index + 1 })),
+      attribute: prev?.attribute
+        ?.filter((_, attributeIndex) => attributeIndex !== index)
+        .map((attribute, index) => ({ ...attribute, order: index + 1 })),
     }))
   }
 
@@ -129,10 +129,10 @@ const AttributesForm: FC<TFormStepProps> = ({
   }
 
   const handleSave = () => {
-    if (attributes.length === 0) {
-      form.setError('name', {
+    if (attributes.length < 3) {
+      return form.setError('name', {
         type: 'manual',
-        message: 'Preencha pelo menos um atributo',
+        message: 'A quantidade mínima de atributos é 3',
       })
     }
 
@@ -164,7 +164,7 @@ const AttributesForm: FC<TFormStepProps> = ({
               <FormItem className="w-full">
                 <FormLabel>Nome</FormLabel>
                 <FormControl>
-                  <Textarea placeholder="Nome do atributo..." {...field} />
+                  <Input placeholder="Nome do atributo..." {...field} />
                 </FormControl>
                 <FormDescription>
                   Nome do atributo. Ex: &quot;Nome do atributo...&quot;
