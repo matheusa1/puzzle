@@ -1,5 +1,6 @@
 import AttributesForm from './AttributesForm'
 import Hints from './HintsForm'
+import OptionsForm from './OptionsForm'
 import PuzzleInfo from './PuzzleInfo'
 
 export type TFormStepProps = {
@@ -33,5 +34,11 @@ export const steps: TFormStep<TFormStepProps>[] = [
     title: 'Atributos',
     description: 'Preencha os atributos do puzzle',
     component: AttributesForm,
+  },
+  {
+    id: 'options',
+    title: 'Opções',
+    description: 'Preencha as opções dos atributos',
+    component: OptionsForm,
   },
 ]
